@@ -30,3 +30,5 @@ class webhookManager {
 
     }
 }
+
+export default webhookManager;
