@@ -1,14 +1,31 @@
 import WebhookInterface from "./interface/webhook.interface";
 
-class webhookManager {
+class WebhookManager {
     private drivers: { [name: string]: WebhookInterface } = {};
 
-    driver(name: string, driver: WebhookInterface | null): WebhookInterface {
-        if (driver !== null) {
+    private static instance: WebhookManager;
+
+    private constructor() {
+    }
+
+    public static initialize(): WebhookManager {
+        if (!WebhookManager.instance) {
+            WebhookManager.instance = new WebhookManager();
+        }
+
+        return WebhookManager.instance;
+    }
+
+    driver(name: string, driver?: WebhookInterface): WebhookInterface {
+        if (driver !== undefined) {
             this.drivers[name] = driver;
         }
         return this.getDriver(name);
 
+    }
+
+    getDrivers(): { [name: string]: WebhookInterface } {
+        return this.drivers;
     }
 
     protected getDriver(name: string): WebhookInterface {
@@ -21,14 +38,6 @@ class webhookManager {
 
     }
 
-    processWebhook(name: string, data: object, headers: object): void {
-        const webhook = this.driver(name, null);
-
-        if (webhook.validate(data, headers)) {
-            return webhook.process(data, headers);
-        }
-
-    }
 }
 
-export default webhookManager;
+export default WebhookManager;

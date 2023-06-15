@@ -1,7 +1,7 @@
 interface WebhookInterface {
-    event: string;
-    validate(data: object, headers: object): boolean;
-    process(data: object, headers: object): void;
+    path: string;
+    validate(request: object, response: object): boolean;
+    process(request: object, response: object): void;
 }
 
 export default WebhookInterface
