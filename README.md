@@ -68,9 +68,23 @@ class Driver implements WebhookInterface {
     }
 }
 
-export default Flutterwave;
+export default Driver;
 ```
 #### register the webhook driver
 ```
 manager.driver('my-driver', new Driver);
 ```
+### Retreive registered webhook
+```
+const myDriver = manager.driver('my-driver')
+```
+After retreiving the registered webhook you have access to the validate and process method
+### Validate and process webhook
+To validate and process we need to pass request and response which can be gotten when we use an external framework
+```
+if(myDriver.validate(request, response)) {
+    return await myDriver.process(request, response)
+}
+```
+
+[Here](https://github.com/abdulsalamIshaq/webhook-manager-example) is an example of how to use the webhook with express.js 
