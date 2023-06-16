@@ -36,7 +36,10 @@ This method is responsible for reteriving all registered drivers
 getDrivers(): { [name: string]: WebhookInterface }
 ```
 ## WebhookInterface
-Any driver that need to be register need to implement the WebhookInterface
+All webhook driver is required to implement the WebhookInterface and it has one property and two method
+1. path
+2. validate()
+3. process()
 ```
 interface WebhookInterface {
     path: string;
@@ -45,7 +48,48 @@ interface WebhookInterface {
 }
 
 ```
+### path property
+This is the path where the webhook will be accessible. example
+```
+import { WebhookInterface } from "webhook-manager";
 
+class Driver implements WebhookInterface {
+    path: string = "/driver";
+    ...
+}
+
+export default Driver;
+```
+From the above example this means the webhook will be accessible in /driver path
+### validate method
+This method is require for validating the webhook if its truely from the actual source, it requires two parameter the request and the response and it return a boolean value
+```
+validate(request: object, response: object): boolean;
+```
+An express.js example on how to validate paystack webhook
+```
+import { Request, Response } from 'express';
+import { WebhookInterface } from "webhook-manager";
+import crypto from 'crypto';
+
+class Paystack implements WebhookInterface {
+
+    path: string = "/paystack";
+    
+    validate(request: Request, response: Response): boolean {
+        const hash = crypto.createHmac('sha512', secret).update(JSON.stringify(req.body)).digest('hex');
+
+        return hash == req.headers['x-paystack-signature'];
+    }
+    
+    ...
+
+}
+export default Paystack;
+
+```
+### process method
+This method is responsible for processing the webhook, it requires two parameter the request and response 
 # How to Use the Webhook Manager
 #### Intialize webhook manager instance in your root file
 ```
