@@ -1,6 +1,5 @@
 # webhook-manager
-Webhook Manager is a simple Library for managing and processing multiple webhook in node which can be implement with most node.js framework eg. express.js, fastify.js, restify.js, Koa.js, hapi.js etc... but not all node.js framework
-
+Webhook Manager is a versatile library designed for managing and processing multiple webhooks in Node.js. It can be implemented with various Node.js frameworks, including but not limited to express.js, fastify.js, restify.js, Koa.js, and hapi.js. However, please note that it may not be compatible with every Node.js framework available.
 
 # Webhook Manager Components
 The webhook manager has two component 
@@ -8,7 +7,7 @@ The webhook manager has two component
 2. The **WebhookInterface**
 
 ## WebhookManager Class
-The WebhookManager is uisng the singleton design pattern and it is responsible for registering and retriving webhook driver and it has 3 method, listed below.
+The WebhookManager utilizes the singleton design pattern and is responsible for registering and retrieving webhook drivers. It provides three methods, listed below:
 
 1. The **initialize()** method
 2. The **driver()** method
@@ -16,22 +15,22 @@ The WebhookManager is uisng the singleton design pattern and it is responsible f
 
 ### The intialize method
 
-This method is responsible for instantiating new WebhookManager instance and it ensures that only one instance of the class exists
+This method is responsible for instantiating a new instance of the WebhookManager class and ensuring that only one instance of the class exists. It follows the singleton design pattern to achieve this purpose.
 ```
 const manager = WebhookManager.initialize();
 ```
 
 ### The driver method
-This method is responsible for registering and registering webhook driver, it has two parameter
+This method is responsible for registering and retrieving a webhook driver. It accepts two parameters.
 ```
 driver(name: string, driver?: WebhookInterface): WebhookInterface
 ```
-The first parameter accept string which is the driver name you want to register or retreive.
+The first parameter of the method accepts a string, which represents the driver name that you want to register or retrieve.
 
-The second parameter is an optional parameter accept and instance of **WebhookInterface**
+The second parameter is optional and accepts an instance of the **WebhookInterface**.
 
 ### The getDrivers method
-This method is responsible for reteriving all registered drivers 
+This method is responsible for retrieving all the registered drivers.
 ```
 getDrivers(): { [name: string]: WebhookInterface }
 ```
@@ -124,7 +123,9 @@ const myDriver = manager.driver('my-driver')
 ```
 After retreiving the registered webhook you have access to the validate and process method
 ### Validate and process webhook
-To validate and process we need to pass request and response which can be gotten when we use an external framework
+To validate and process webhook requests, you need to pass the request and response objects, which are typically obtained when using an external framework.
+
+When integrating the WebhookInterface with an external framework, such as Express.js or any other Node.js framework, you can obtain the request and response objects from the framework's request handler or middleware. These objects contain the necessary information and methods to handle the incoming webhook request and send the response back.
 ```
 if(myDriver.validate(request, response)) {
     return await myDriver.process(request, response)
