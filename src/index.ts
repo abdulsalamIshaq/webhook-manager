@@ -1,7 +1,2 @@
-import WebhookInterface from "./interface/webhook.interface";
-import WebhookManager from "./webhook-manager";
-
-export {
-    WebhookInterface,
-    WebhookManager
-}
+export * from "./interface/webhook.interface"
+export * from "./webhook-manager";
