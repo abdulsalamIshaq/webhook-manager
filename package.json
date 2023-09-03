@@ -1,6 +1,6 @@
 {
   "name": "@olayanku/webhook-manager",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Library for managing and processing multiple webhooks",
   "main": "dist/index.js",
   "types": "lib/index.d.ts",
