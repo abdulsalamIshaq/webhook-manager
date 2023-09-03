@@ -17,7 +17,7 @@ To start, we need a TypeScript environment with the necessary dependencies. Here
 Now, let's install the required packages:
 
 ```shell
-npm install express webhook-manager
+npm install express @olayanku/webhook-manager
 ```
 
 After installing the necessary dependencies, let's create a new TypeScript file named `index.ts` to set up our Express server:
