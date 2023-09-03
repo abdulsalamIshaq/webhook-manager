@@ -24,7 +24,7 @@ After installing the necessary dependencies, let's create a new TypeScript file 
 
 ```typescript
 import express from 'express';
-import { WebhookManager } from "webhook-manager";
+import { WebhookManager } from "@olayanku/webhook-manager";
 
 const app = express();
 app.use(express.json());
@@ -63,7 +63,7 @@ Create a `/drivers` directory and create a `paystack.ts` file inside the directo
 
 ```typescript
 import { Request, Response } from 'express';
-import { WebhookInterface } from "webhook-manager";
+import { WebhookInterface } from "@olayanku/webhook-manager";
 import crypto from 'crypto';
 
 class Paystack implements WebhookInterface {
@@ -92,7 +92,7 @@ Open `index.ts` and add the following code
 
 ```typescript
 import express from 'express';
-import { WebhookManager } from "webhook-manager";
+import { WebhookManager } from "@olayanku/webhook-manager";
 import Paystack from "./drivers/paystack";
 
 const app = express();

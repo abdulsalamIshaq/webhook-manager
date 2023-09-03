@@ -13,9 +13,13 @@
       "*": [
         "node_modules/*"
       ]
-    }
+    },
+    "declaration": true,
+    "declarationDir": "./lib"
   },
   "include": [
     "src/**/*"
-  ]
+  ],
+    "exclude": ["node_modules"]
+
 }
